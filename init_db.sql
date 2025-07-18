@@ -22,3 +22,12 @@ CREATE TABLE IF NOT EXISTS device_comments (
     comment TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ); 
+
+-- Таблица для учёта реальных платежей по арендам
+CREATE TABLE IF NOT EXISTS debt_payments (
+    id SERIAL PRIMARY KEY,
+    rent_id INTEGER NOT NULL REFERENCES rents(id),
+    amount NUMERIC NOT NULL,
+    paid_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    type VARCHAR(32) DEFAULT 'manual'
+); 
